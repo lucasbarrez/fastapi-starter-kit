@@ -46,7 +46,7 @@ This project follows a **Layered Architecture** to ensure maintainability and te
 
 ```mermaid
 graph TD
-    Client[Client (Next.js)] -->|HTTP Request| API[API Endpoint (FastAPI)]
+    Client[Client - Next.js] -->|HTTP Request| API[API Endpoint (FastAPI)]
     API -->|Validation| Schema[Pydantic Schema]
     API -->|Auth Check| Auth[Security Layer]
     Auth -->|HMAC + DB| DB[(PostgreSQL)]
@@ -64,14 +64,14 @@ graph TD
 
 ## 🛠 Tech Stack
 
--   **Framework:** [FastAPI](https://fastapi.tiangolo.com/)
--   **Language:** Python 3.11+
--   **Database:** PostgreSQL (primary), Supabase (optional services)
--   **ORM:** [SQLAlchemy](https://www.sqlalchemy.org/) (Async)
--   **Driver:** `asyncpg`
--   **Dependency Management:** [uv](https://github.com/astral-sh/uv)
--   **Linting/Formatting:** Ruff, Black, Mypy, Pre-commit
--   **Testing:** Pytest
+- **Framework:** [FastAPI](https://fastapi.tiangolo.com/)
+- **Language:** Python 3.11+
+- **Database:** PostgreSQL (primary), Supabase (optional services)
+- **ORM:** [SQLAlchemy](https://www.sqlalchemy.org/) (Async)
+- **Driver:** `asyncpg`
+- **Dependency Management:** [uv](https://github.com/astral-sh/uv)
+- **Linting/Formatting:** Ruff, Black, Mypy, Pre-commit
+- **Testing:** Pytest
 
 ---
 
@@ -79,9 +79,9 @@ graph TD
 
 ### Prerequisites
 
--   **Python 3.11+**
--   **UV** (Recommended) or user standard `pip`
--   **PostgreSQL** database (e.g. Docker, Supabase, Neon)
+- **Python 3.11+**
+- **UV** (Recommended) or user standard `pip`
+- **PostgreSQL** database (e.g. Docker, Supabase, Neon)
 
 ### 1. Clone & Setup
 
@@ -139,9 +139,9 @@ This API is designed to work as a backend for a **BetterAuth** (Next.js) fronten
 1.  **Client Request:** The frontend sends a request with `Authorization: Bearer <session_token>`.
 2.  **HMAC Check:** The backend crypto-graphically verifies the token signature using `HMAC-SHA256` and the `BETTER_AUTH_SECRET`.
 3.  **Database Lookup:**
-    *   The backend extracts the session ID from the token.
-    *   It queries the `session` table in PostgreSQL.
-    *   It verifies the session exists and has not expired (`expiresAt > NOW()`).
+    - The backend extracts the session ID from the token.
+    - It queries the `session` table in PostgreSQL.
+    - It verifies the session exists and has not expired (`expiresAt > NOW()`).
 4.  **User Context:** If valid, the backend fetches the `user` details and injects them into `request.state.user`.
 
 **Security Note:** This approach is stateful but highly secure, allowing instant session revocation.
@@ -152,23 +152,25 @@ This API is designed to work as a backend for a **BetterAuth** (Next.js) fronten
 
 The project uses a `Makefile` to simplify common commands:
 
-| Command | Description |
-| :--- | :--- |
-| `make install` | Install dependencies and pre-commit hooks |
-| `make dev` | Start development server with hot-reload |
-| `make test` | Run tests with Pytest |
-| `make lint` | Run Ruff and Mypy checks |
-| `make format` | Auto-format code with Black and Ruff |
+| Command          | Description                                 |
+| :--------------- | :------------------------------------------ |
+| `make install`   | Install dependencies and pre-commit hooks   |
+| `make dev`       | Start development server with hot-reload    |
+| `make test`      | Run tests with Pytest                       |
+| `make lint`      | Run Ruff and Mypy checks                    |
+| `make format`    | Auto-format code with Black and Ruff        |
 | `make docker-up` | Start Postgres (and app) via Docker Compose |
 
 ### Pre-commit Hooks
 
 We use pre-commit to ensure code quality before every commit. It runs:
--   **Ruff**: Linter & Import sorter
--   **Black**: Code formatter
--   **Mypy**: Static type checker
+
+- **Ruff**: Linter & Import sorter
+- **Black**: Code formatter
+- **Mypy**: Static type checker
 
 To run manually:
+
 ```bash
 pre-commit run --all-files
 ```
@@ -187,9 +189,10 @@ docker-compose -f docker-compose.prod.yml up -d --build
 ```
 
 **Key Production Settings:**
--   Ensure `DEBUG=False` in `.env`.
--   Set `ENVIRONMENT=production`.
--   Use a managed PostgreSQL instance for data persistence.
+
+- Ensure `DEBUG=False` in `.env`.
+- Set `ENVIRONMENT=production`.
+- Use a managed PostgreSQL instance for data persistence.
 
 ---
 
@@ -197,8 +200,8 @@ docker-compose -f docker-compose.prod.yml up -d --build
 
 FastAPI automatically generates interactive documentation:
 
--   **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
--   **ReDoc:** [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc:** [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ---
 
