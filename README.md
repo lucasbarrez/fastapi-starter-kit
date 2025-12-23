@@ -46,7 +46,7 @@ This project follows a **Layered Architecture** to ensure maintainability and te
 
 ```mermaid
 graph TD
-    Client[Client - Next.js] -->|HTTP Request| API[API Endpoint (FastAPI)]
+    Client[Client - Next.js] -->|HTTP Request| API[API Endpoint - FastAPI]
     API -->|Validation| Schema[Pydantic Schema]
     API -->|Auth Check| Auth[Security Layer]
     Auth -->|HMAC + DB| DB[(PostgreSQL)]
